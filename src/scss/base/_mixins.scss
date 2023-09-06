@@ -1,0 +1,50 @@
+// Los "mixin" sirven para crear "paquetes" de codigo de css, y poder aplicarlo con un @include en cualquier
+// selector de clase, por ejemplo para los botones que contienen mucho codigo, se puede hacer
+// un paquete con todo su codigo, y luego al llamar la clase .botones, agregar un 
+// include que sea "@include m.$boton", habiendo creado el "@mixin boton".
+@use '../base/variables' as v;
+
+// @mixin heading($color: blue, $border-radius: false) {
+//     text-transform: uppercase;
+//     font-size: 2.4rem;
+//     color: $color;
+//     letter-spacing: 1px;
+//     background-color: black;
+
+//     @if $border-radius {
+//         border-radius: 1rem;
+//     }
+// }
+
+@mixin telefono {
+    @media (min-width: v.$telefono){
+        @content; // Soporte para bloques de codigo.
+    }
+}
+@mixin tablet {
+    @media (min-width: v.$tablet){
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: v.$desktop){
+        @content;
+    }
+}
+@mixin desktopXL {
+    @media (min-width: v.$desktopXL){
+        @content;
+    }
+}
+
+@mixin grid($columnas: 2, $espaciado: 5rem) {
+    display: grid;
+    grid-template-columns: repeat($columnas,1fr);
+    gap: $espaciado;
+}
+
+@mixin resetear-lista { // Listas sin viñetas
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
